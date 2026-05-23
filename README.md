@@ -1,115 +1,58 @@
-![banner](banner.png?raw=true)
+## Poly light GRUB theme
 
-## Installation:
-Usage:  `sudo ./install.sh [OPTIONS...]`
-```
-  -t, --theme                 theme variant(s)          [tela|vimix|stylish|whitesur]       (default is tela)
-  -i, --icon                  icon variant(s)           [color|white|whitesur]              (default is color)
-  -s, --screen                screen display variant(s) [1080p|2k|4k|ultrawide|ultrawide2k] (default is 1080p)
-  -c, --custom-resolution     set custom resolution     (e.g., 1600x900)                    (disabled in default)
-  -r, --remove                remove theme              [tela|vimix|stylish|whitesur]       (must add theme name option, default is tela)
+Supported languages: Chinese (simplified), Chinese (traditional), English, French, German, Hungarian, Italian, Korean, Latvian, Norwegian, Polish, Portuguese, Russian, Rusyn, Spanish, Turkish, Ukrainian
 
-  -b, --boot                  install theme into '/boot/grub' or '/boot/grub2'
-  -g, --generate              do not install but generate theme into chosen directory       (must add your directory)
+![](https://i.imgur.com/9VBf1Nl.gif)
 
-  -h, --help                  show this help
-```
-*If no options are used, a user interface *`dialog`* will show up instead*
+Screenshot is intentionally low res to fit GitHub UI. See also: [1280×720](https://i.imgur.com/HT4ivRY.png), [1920×1080](https://i.imgur.com/n8jBLsj.png)
 
-### Examples:
- - Install Tela theme on 2k display device:
+---
+
+
+### Installation / update
+
+- **Secure way:**
+
+  - Download install script:
+
+    ```sh
+    wget -P /tmp https://github.com/shvchk/poly-light/raw/master/install.sh
+    ```
+
+  - Review it at `/tmp/install.sh`
+
+  - Run it:
+
+    ```sh
+    bash /tmp/install.sh
+    ```
+
+- **Easier, less secure way** — just download and run install script:
+
+  ```sh
+  wget -O - https://github.com/shvchk/poly-light/raw/master/install.sh | bash
+  ```
+
+<br>
+
+You can use `--lang` option to select language and disable interactive language selection, e.g.:
+
 ```sh
-sudo ./install.sh -t tela -s 2k
+bash /tmp/install.sh --lang German
 ```
- - Install Tela theme with custom resolution:
+
+or
+
 ```sh
-sudo ./install.sh -t tela -c 1600x900
-```
- - Install Tela theme into /boot/grub/themes:
-```sh
-sudo ./install.sh -b -t tela
-```
- - Uninstall Tela theme:
-```sh
-sudo ./install.sh -r -t tela
+wget -O- https://github.com/shvchk/poly-light/raw/master/install.sh | bash -s -- --lang Korean
 ```
 
-## Installation with NixOS:
-To use this theme with NixOS you will have to enable [flakes](https://wiki.nixos.org/wiki/flakes). Before you do this, please inform yourself if you really want to, because flakes are still an unstable feature.
-First you will have to add grub2 to your `flake.nix` file as a new input.
-```nix
-# flake.nix
-{
-  description = "NixOS configuration";
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Add grub2 themes to your inputs ...
-    grub2-themes = {
-      url = "github:vinceliuice/grub2-themes";
-    };
-  };
-  outputs = inputs@{ nixpkgs,  grub2-themes, ... }: {
-    nixosConfigurations = {
-      my_host = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        # ... and then to your modules
-        modules = [
-          ./configuration.nix
-          grub2-themes.nixosModules.default
-        ];
-      };
-    };
-  };
-}
-```
-After that, you can configure the theme as shown below. In this example it is inside the `configuration.nix` file but it can be any file you choose.
-```nix
-# configuration.nix
-{ inputs, config, pkgs, lib, ... }:
-{
-  boot.loader.grub = { ... };
-  boot.loader.grub2-theme = {
-    enable = true;
-    theme = "stylish";
-    footer = true;
-    customResolution = "1600x900";  # Optional: Set a custom resolution
-  };
-}
-```
+Full list of languages see in `INSTALLER_LANGS` variable in [install.sh](install.sh)
 
-## Issues / tweaks:
-### Correcting display resolution:
- - On the grub screen, press `c` to enter the command line
- - Enter `vbeinfo` or `videoinfo` to check available resolutions
- - Open `/etc/default/grub`, and edit `GRUB_GFXMODE=[height]x[width]x32` to match your resolution
- - Finally, run `grub-mkconfig -o /boot/grub/grub.cfg` to update your grub config
+---
 
-### Setting a custom background:
- - Make sure you have `imagemagick` installed, or at least something that provides `convert` or `magick`
- - Find the resolution of your display, and make sure your background matches the resolution
-   - 1920x1080 >> 1080p
-   - 2560x1080 >> ultrawide
-   - 2560x1440 >> 2k
-   - 3440x1440 >> ultrawide2k
-   - 3840x2160 >> 4k
- - Place your custom background inside the root of the project, and name it `background.jpg`
- - Run the installer like normal, but with -s `[YOUR_RESOLUTION]` and -t `[THEME]` and -i `[ICON]`
-   - Make sure to replace `[YOUR_RESOLUTION]` with your resolution and `[THEME]` with the theme
- - Alternatively, use the `-c` option to set a custom resolution
 
-## Contributing:
- - If you made changes to icons, or added a new one:
-   - Delete the existing icon, if there is one
-   - Run `cd assets; ./render-all.sh`
- - Create a pull request from your branch or fork
- - If any issues occur, report then to the [issue](https://github.com/vinceliuice/grub2-themes/issues) page
+### See also
 
-## Preview:
-![preview](preview.png?raw=true)
-
-## Documents
-
-[Grub2 theme reference](https://wiki.rosalab.ru/en/index.php/Grub2_theme_/_reference)  
-
-[Grub2 theme tutorial](https://wiki.rosalab.ru/en/index.php/Grub2_theme_tutorial)
+- [Poly dark GRUB theme](https://github.com/shvchk/poly-dark)
+- [Fallout GRUB theme](https://github.com/shvchk/fallout-grub-theme)
