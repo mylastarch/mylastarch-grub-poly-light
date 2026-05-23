@@ -17,8 +17,8 @@ terminal-border: "0"
   width = 70%
   height = 60%
   item_font = "Unifont Regular 18"
-  item_color = "#777777"
-  selected_item_color = "#444444"
+  item_color = "#000000"
+  selected_item_color = "#FFFFFF"
   item_height = 40
   item_spacing = 4
   item_pixmap_style = "item_*.png"
@@ -66,7 +66,7 @@ terminal-border: "0"
   # text = "在 %d 内启动"
   # zh_TW
   # text = "在 %d 內啟動"
-  color = "#777777"
+  color = "#000000"
   font = "Unifont Regular 18"
 }
 
@@ -110,6 +110,6 @@ terminal-border: "0"
   # text = "使用 ↑ 和 ↓ 键移动选择条，Enter 键确认"
   # zh_TW
   # text = "使用 ↑ 和 ↓ 鍵移動選擇，Enter 鍵繼續"
-  color = "#777777"
+  color = "#000000"
   font = "Unifont Regular 18"
 }
