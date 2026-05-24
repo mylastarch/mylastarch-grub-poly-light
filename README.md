@@ -1,4 +1,4 @@
-## Poly light GRUB theme 
+## Poly light GRUB theme  
 
 Supported languages: Chinese (simplified), Chinese (traditional), English, French, German, Hungarian, Italian, Korean, Latvian, Norwegian, Polish, Portuguese, Russian, Rusyn, Spanish, Turkish, Ukrainian
 
