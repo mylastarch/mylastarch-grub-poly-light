@@ -66,7 +66,7 @@ terminal-border: "0"
   # text = "在 %d 内启动"
   # zh_TW
   # text = "在 %d 內啟動"
-  color = "#000000"
+  color = "#FFFFFF"
   font = "Unifont Regular 18"
 }
 
